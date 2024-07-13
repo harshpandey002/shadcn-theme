@@ -67,7 +67,7 @@ export function CardsPaymentMethod() {
             />
             <Label
               htmlFor="paypal"
-              className="flex flex-col items-center justify-between rounded-md border-2 border-primary/20 bg-transparent p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary">
+              className="flex flex-col items-center justify-between rounded-md border-2 border-input/20 bg-transparent p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary">
               <Icons.paypal className="mb-3 h-6 w-6" />
               Paypal
             </Label>
