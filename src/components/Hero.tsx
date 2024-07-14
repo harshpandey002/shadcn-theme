@@ -16,7 +16,7 @@ export default function Hero() {
   };
 
   return (
-    <div className="w-full grid grid-cols-4 gap-10 py-20">
+    <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-10 pt-10 pb-20">
       <div className="col-span-2 flex flex-col justify-center">
         <div className="flex items-center gap-2 mb-2 ml-2">
           <Link
@@ -58,7 +58,7 @@ export default function Hero() {
         />
       </div>
       {showAdvControls ? (
-        <div className="col-span-4">
+        <div className="col-span-2 lg:col-span-4">
           <AdvanceControls onOpenCode={onOpenCode} />
         </div>
       ) : null}

@@ -43,8 +43,8 @@ export default function BasicControls({
   };
 
   return (
-    <div className="flex gap-4 mt-4">
-      <div className="w-max">
+    <div className="flex flex-col md:flex-row gap-4 mt-4">
+      <div className="w-full md:w-max">
         <Label className="text-xs" htmlFor="hex">
           Pick a color
         </Label>

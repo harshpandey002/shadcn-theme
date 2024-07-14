@@ -26,7 +26,7 @@ export default function AdvanceControls({
   const theme = useAtomValue(themeAtom);
 
   return (
-    <Card className="sticky top-10">
+    <Card>
       <CardHeader className="flex-row justify-between">
         <div className="flex flex-col gap-1">
           <CardTitle>Advance Controls</CardTitle>
@@ -41,7 +41,7 @@ export default function AdvanceControls({
         </Button>
       </CardHeader>
       <CardContent className="">
-        <div className="grid grid-cols-5 gap-4 w-full">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 w-full">
           {cssVariables.map((cssVar) => (
             <div className="flex items-center" key={cssVar}>
               <Label className="text-xs w-full" htmlFor="hue">
