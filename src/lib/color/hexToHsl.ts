@@ -33,8 +33,9 @@ export function hexToHsl(hex: string) {
     h /= 6;
   }
 
-  h = Math.round(360 * h);
-  s = Math.round(100 * s);
-  l = Math.round(100 * l);
+  h = Math.floor(Math.round(360 * h));
+  s = Math.floor(Math.round(100 * s));
+  l = Math.floor(Math.round(100 * l));
+
   return { h, s, l };
 }

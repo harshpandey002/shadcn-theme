@@ -34,17 +34,10 @@ export default function AdvanceControls({
         </div>
       ))}
       <div className="mt-auto flex gap-2">
-        <Button
-          variant="secondary"
-          onClick={undefined}
-          className="rounded-3xl w-full">
+        <Button variant="secondary" onClick={undefined} className="w-full">
           Code
         </Button>
-        <Button
-          onClick={() => setShowAdvControls(false)}
-          className="rounded-3xl">
-          Close
-        </Button>
+        <Button onClick={() => setShowAdvControls(false)}>Close</Button>
       </div>
     </div>
   );
