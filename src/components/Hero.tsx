@@ -1,11 +1,12 @@
 import BasicControls from '@/components/BasicControls';
 import { Icons } from '@/components/icons';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { MoveRight } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import AdvanceControls from './AdvanceControls';
 import CopyCode from './CopyCode';
+import { cn } from '@/lib/utils';
 
 export default function Hero() {
   const [showAdvControls, setShowAdvControls] = useState(false);
@@ -42,12 +43,16 @@ export default function Hero() {
           Generate high quality theme for your website with a single color, or
           click Advance Controls to have even more control over your theme.
         </p>
-        <Button
-          size="lg"
-          className="flex items-center gap-3 w-max mt-8 rounded-[24px] bg-[#242424] text-white text-md hover:bg-[#070707] hover:underline mx-auto md:mx-0">
+        <Link
+          href="https://github.com/harshpandey002/shadcn-theme"
+          target="_blank"
+          className={cn(
+            buttonVariants(),
+            'flex items-center gap-3 w-max mt-8 rounded-[24px] bg-[#242424] text-white text-md hover:bg-[#070707] hover:underline mx-auto md:mx-0'
+          )}>
           <Icons.gitHub className="h-5 w-5" />
           View Code
-        </Button>
+        </Link>
       </div>
       <div className="col-span-2">
         <BasicControls

@@ -10,7 +10,7 @@ export default function Navbar() {
       <Link
         className="block md:hidden"
         target="_blank"
-        href="https://www.github.com/harshpandey002/">
+        href="https://github.com/harshpandey002/shadcn-theme">
         {<Icons.gitHub className="h-5 w-5" />}
       </Link>
       <ul className="hidden md:flex items-center gap-8 list-none font-medium">
