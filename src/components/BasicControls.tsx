@@ -1,5 +1,5 @@
 'use client';
-import { FileJson, Settings2 } from 'lucide-react';
+import { Code, Settings2 } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
@@ -10,11 +10,14 @@ import { ToggleGroup, ToggleGroupItem } from './ui/toggle-group';
 import useThemeGenerator from '../hooks/useThemeGenerator';
 import { useAtom } from 'jotai';
 import { themeAtom } from '@/jotai/jotai';
+import { Dispatch, SetStateAction } from 'react';
 
 export default function BasicControls({
+  showAdvControls,
   setShowAdvControls,
 }: {
-  setShowAdvControls: (ctr: boolean) => void;
+  showAdvControls: boolean;
+  setShowAdvControls: Dispatch<SetStateAction<boolean>>;
 }) {
   const {
     applyTheme,
@@ -33,10 +36,17 @@ export default function BasicControls({
     document.documentElement.style.setProperty(`--radius`, radius);
   };
 
+  const triggerAdvControls = () => {
+    setShowAdvControls((prev) => !prev);
+  };
+
   return (
     <div className="flex gap-4 mt-4">
       <div className="w-max">
-        <HexColorPicker color={color} onChange={applyTheme} />
+        <Label className="text-xs" htmlFor="hex">
+          Pick a color
+        </Label>
+        <HexColorPicker color={color} onChange={applyTheme} className="mt-1" />
         <div className="mt-2">
           <Label className="text-xs" htmlFor="hex">
             Or enter a HEX value
@@ -103,13 +113,14 @@ export default function BasicControls({
         <div className="mt-auto flex gap-2">
           <Button
             variant="secondary"
-            onClick={() => setShowAdvControls(true)}
-            className="w-full flex items-center gap-1">
+            onClick={triggerAdvControls}
+            className="w-full flex items-center gap-2">
             <Settings2 size={18} />
+            {showAdvControls ? 'Hide ' : 'Show '}
             Advance Controls
           </Button>
-          <Button onClick={undefined} className="w-max flex items-center gap-1">
-            <FileJson size={18} />
+          <Button onClick={undefined} className="w-max flex items-center gap-2">
+            <Code size={18} />
             Code
           </Button>
         </div>
