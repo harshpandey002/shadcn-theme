@@ -23,7 +23,7 @@ const initialThemeValue = {
   radius: '0.5rem',
 };
 
-export const primaryColorAtom = atom('#ffffff');
+export const primaryColorAtom = atom('#2d629f');
 export const saturationAtom = atom(80);
 export const lightnessAtom = atom(20);
 

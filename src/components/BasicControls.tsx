@@ -48,7 +48,11 @@ export default function BasicControls({
         <Label className="text-xs" htmlFor="hex">
           Pick a color
         </Label>
-        <HexColorPicker color={color} onChange={applyTheme} className="mt-1" />
+        <HexColorPicker
+          color={color}
+          onChange={applyTheme}
+          className="mt-1 h-[200px] bg-card rounded-lg"
+        />
         <div className="mt-2">
           <Label className="text-xs" htmlFor="hex">
             Or enter a HEX value

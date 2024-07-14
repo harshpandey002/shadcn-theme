@@ -16,11 +16,13 @@ export default function Navbar() {
       <ul className="hidden md:flex items-center gap-8 list-none font-medium">
         <Link
           href="https://tailwindcss.com/"
+          target="_blank"
           className="flex items-center gap-1 hover:text-primary">
           <li>Tailwind</li>
           <ExternalLink className="w-3.5 h-3.5" />
         </Link>
         <Link
+          target="_blank"
           href="https://ui.shadcn.com/"
           className="flex items-center gap-1 hover:text-primary">
           <li>Shadcn</li>
