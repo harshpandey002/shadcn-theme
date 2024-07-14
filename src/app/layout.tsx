@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 const fontSans = GeistSans;
 
 export const metadata: Metadata = {
-  title: 'Shadcn Theme Generator',
+  title: 'Shadcn Theme Generator | Harsh Pandey',
   description: 'Advance theme generator for Shadcn',
 };
 
