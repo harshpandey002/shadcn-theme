@@ -5,9 +5,15 @@ import { MoveRight } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import AdvanceControls from './AdvanceControls';
+import CopyCode from './CopyCode';
 
 export default function Hero() {
   const [showAdvControls, setShowAdvControls] = useState(false);
+  const [showCode, setShowCode] = useState(false);
+
+  const onOpenCode = () => {
+    setShowCode(true);
+  };
 
   return (
     <div className="w-full grid grid-cols-4 gap-10 py-20">
@@ -48,13 +54,15 @@ export default function Hero() {
         <BasicControls
           showAdvControls={showAdvControls}
           setShowAdvControls={setShowAdvControls}
+          onOpenCode={onOpenCode}
         />
       </div>
       {showAdvControls ? (
         <div className="col-span-4">
-          <AdvanceControls />
+          <AdvanceControls onOpenCode={onOpenCode} />
         </div>
       ) : null}
+      <CopyCode show={showCode} onClose={() => setShowCode(false)} />
     </div>
   );
 }

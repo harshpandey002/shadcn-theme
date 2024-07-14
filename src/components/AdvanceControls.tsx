@@ -15,9 +15,13 @@ import {
   CardHeader,
   CardTitle,
 } from './ui/card';
-import { Code, FileJson } from 'lucide-react';
+import { Code } from 'lucide-react';
 
-export default function AdvanceControls() {
+export default function AdvanceControls({
+  onOpenCode,
+}: {
+  onOpenCode: () => void;
+}) {
   const { handleAdvControls } = useThemeGenerator();
   const theme = useAtomValue(themeAtom);
 
@@ -31,7 +35,7 @@ export default function AdvanceControls() {
           </CardDescription>
         </div>
 
-        <Button onClick={undefined} className="w-max flex items-center gap-2">
+        <Button onClick={onOpenCode} className="w-max flex items-center gap-2">
           <Code size={18} />
           Code
         </Button>

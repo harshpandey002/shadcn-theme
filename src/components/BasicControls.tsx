@@ -15,9 +15,11 @@ import { Dispatch, SetStateAction } from 'react';
 export default function BasicControls({
   showAdvControls,
   setShowAdvControls,
+  onOpenCode,
 }: {
   showAdvControls: boolean;
   setShowAdvControls: Dispatch<SetStateAction<boolean>>;
+  onOpenCode: () => void;
 }) {
   const {
     applyTheme,
@@ -119,7 +121,9 @@ export default function BasicControls({
             {showAdvControls ? 'Hide ' : 'Show '}
             Advance Controls
           </Button>
-          <Button onClick={undefined} className="w-max flex items-center gap-2">
+          <Button
+            onClick={onOpenCode}
+            className="w-max flex items-center gap-2">
             <Code size={18} />
             Code
           </Button>
