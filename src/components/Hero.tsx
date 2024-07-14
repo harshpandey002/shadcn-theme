@@ -17,8 +17,8 @@ export default function Hero() {
 
   return (
     <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-10 pt-10 pb-20">
-      <div className="col-span-2 flex flex-col justify-center">
-        <div className="flex items-center gap-2 mb-2 ml-2">
+      <div className="col-span-2 flex flex-col justify-center text-center md:text-start">
+        <div className="flex items-center justify-center md:justify-start gap-2 mb-2 ml-2">
           <Link
             target="_blank"
             href="https://www.linkedin.com/in/harshpandey002/">
@@ -38,14 +38,13 @@ export default function Hero() {
         </div>
 
         <h1 className="text-4xl font-black italic">Shadcn Theme Generator</h1>
-        <p className="max-w-xl text-xl mt-2 font-medium text-muted-foreground">
+        <p className="max-w-xl md:text-xl mt-2 font-medium text-muted-foreground">
           Generate high quality theme for your website with a single color, or
-          click on the Advance Controls to have even more control over your
-          theme.
+          click Advance Controls to have even more control over your theme.
         </p>
         <Button
           size="lg"
-          className="flex items-center gap-3 w-max mt-8 rounded-[24px] bg-[#242424] text-white text-md hover:bg-[#070707] hover:underline">
+          className="flex items-center gap-3 w-max mt-8 rounded-[24px] bg-[#242424] text-white text-md hover:bg-[#070707] hover:underline mx-auto md:mx-0">
           <Icons.gitHub className="h-5 w-5" />
           View Code
         </Button>
