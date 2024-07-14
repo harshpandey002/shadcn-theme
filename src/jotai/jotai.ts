@@ -1,15 +1,26 @@
 import { atom } from 'jotai';
 
 const initialThemeValue = {
-  background: '',
-  foreground: '',
-  primary: '',
-  'primary-foreground': '',
-  secondary: '',
-  'secondary-foreground': '',
-  input: '',
-  border: '',
-  ring: '',
+  background: '212 87% 95%',
+  foreground: '212 5% 10%',
+  card: '212 50% 90%',
+  'card-foreground': '212 5% 15%',
+  popover: '212 87% 95%',
+  'popover-foreground': '212 95% 10%',
+  primary: '212 56% 40%',
+  'primary-foreground': '0 0% 100%',
+  secondary: '212 30% 70%',
+  'secondary-foreground': '0 0% 0%',
+  muted: '174 30% 85%',
+  'muted-foreground': '212 5% 35%',
+  accent: '174 30% 80%',
+  'accent-foreground': '212 5% 15%',
+  destructive: '0 87% 30%',
+  'destructive-foreground': '212 5% 90%',
+  border: '212 30% 50%',
+  input: '212 30% 24%',
+  ring: '212 56% 40%',
+  radius: '0.5rem',
 };
 
 export const primaryColorAtom = atom('#ffffff');

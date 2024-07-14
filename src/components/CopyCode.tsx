@@ -10,6 +10,9 @@ import {
 } from './ui/dialog';
 import { CheckIcon, CopyIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useAtomValue } from 'jotai';
+import { themeAtom } from '@/jotai/jotai';
+import { getThemeCode } from '@/lib/getThemeCode';
 
 export default function CopyCode({
   show,
@@ -19,6 +22,7 @@ export default function CopyCode({
   onClose: () => void;
 }) {
   const [hasCopied, setHasCopied] = useState(false);
+  const theme = useAtomValue(themeAtom);
 
   useEffect(() => {
     setTimeout(() => {
@@ -33,6 +37,12 @@ export default function CopyCode({
     }
   };
 
+  const handleCopy = () => {
+    const code = getThemeCode(theme);
+    navigator.clipboard.writeText(code);
+    setHasCopied(true);
+  };
+
   return (
     <Dialog open={show} onOpenChange={handleClose}>
       <DialogContent className="max-w-2xl outline-none">
@@ -42,13 +52,11 @@ export default function CopyCode({
             Copy and paste the following code into your CSS file.
           </DialogDescription>
         </DialogHeader>
-        <pre className="text-sm p-4 bg-muted rounded-lg relative">
+        <pre className="text-sm border border-border bg-muted rounded-lg relative">
           <Button
             size="sm"
             variant="ghost"
-            onClick={() => {
-              setHasCopied(true);
-            }}
+            onClick={handleCopy}
             className="absolute right-4 top-2">
             {hasCopied ? (
               <CheckIcon className="mr-2 h-4 w-4" />
@@ -57,7 +65,7 @@ export default function CopyCode({
             )}
             Copy
           </Button>
-          ruke lauda
+          {getThemeCode(theme)}
         </pre>
       </DialogContent>
     </Dialog>

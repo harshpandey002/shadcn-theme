@@ -30,6 +30,8 @@ export default function useThemeGenerator() {
   const [lightness, setLightness] = useAtom(lightnessAtom);
   const [theme, setTheme] = useAtom(themeAtom);
 
+  const radius = theme.radius || '0.5rem';
+
   const debouncedSetTheme = useDebounce(setTheme, 400);
 
   function applyTheme(baseHex: string) {
@@ -153,6 +155,7 @@ export default function useThemeGenerator() {
       border: modifyColor(hsl, { sMin: 20, sMax: 30, lMin: 50, lMax: 82 }),
       input: modifyColor(hsl, { sMin: 20, sMax: 30, lMin: 18, lMax: 50 }),
       ring: modifyColor(hsl, {}),
+      radius,
     };
 
     applyThemeColors(theme);
