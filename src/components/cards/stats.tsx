@@ -2,16 +2,8 @@ import { useTheme } from 'next-themes';
 import { Bar, BarChart, Line, LineChart, ResponsiveContainer } from 'recharts';
 
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
-
-//TODO: Replace with your global state
-const theme = {
-  light: {
-    primary: '250 52% 26%',
-  },
-  dark: {
-    primary: '250 52% 26%',
-  },
-};
+import { useAtomValue } from 'jotai';
+import { themeAtom } from '@/jotai/jotai';
 
 const data = [
   {
@@ -50,6 +42,7 @@ const data = [
 
 export function CardsStats() {
   const { theme: mode } = useTheme();
+  const theme = useAtomValue(themeAtom);
 
   return (
     <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-2">
@@ -78,14 +71,11 @@ export function CardsStats() {
                   dataKey="revenue"
                   activeDot={{
                     r: 6,
-                    style: { fill: 'var(--theme-primary)', opacity: 0.25 },
+                    style: { fill: 'hsl(var(--primary))', opacity: 0.25 },
                   }}
                   style={
                     {
-                      stroke: 'var(--theme-primary)',
-                      '--theme-primary': `hsl(${
-                        theme?.[mode === 'dark' ? 'dark' : 'light'].primary
-                      })`,
+                      stroke: 'hsl(var(--primary))',
                     } as React.CSSProperties
                   }
                 />
@@ -110,11 +100,9 @@ export function CardsStats() {
                   dataKey="subscription"
                   style={
                     {
-                      fill: 'var(--theme-primary)',
+                      fill: 'hsl(var(--primary))',
                       opacity: 1,
-                      '--theme-primary': `hsl(${
-                        theme?.[mode === 'dark' ? 'dark' : 'light'].primary
-                      })`,
+                      '--theme-primary': `hsl(${theme?.primary})`,
                     } as React.CSSProperties
                   }
                 />

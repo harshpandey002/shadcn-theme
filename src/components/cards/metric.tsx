@@ -9,16 +9,6 @@ import {
   CardTitle,
 } from '../ui/card';
 
-//TODO: Replace with your global state
-const theme = {
-  light: {
-    primary: '250 52% 26%',
-  },
-  dark: {
-    primary: '250 52% 26%',
-  },
-};
-
 const data = [
   {
     average: 400,
@@ -108,15 +98,13 @@ export function CardsMetric() {
                 dataKey="average"
                 activeDot={{
                   r: 6,
-                  style: { fill: 'var(--theme-primary)', opacity: 0.25 },
+                  style: { fill: 'hsl(var(--primary))', opacity: 0.25 },
                 }}
                 style={
                   {
-                    stroke: 'var(--theme-primary)',
+                    stroke: 'hsl(var(--primary))',
                     opacity: 0.25,
-                    '--theme-primary': `hsl(${
-                      theme?.[mode === 'dark' ? 'dark' : 'light'].primary
-                    })`,
+                    '--theme-primary': `hsl(var(--primary))`,
                   } as React.CSSProperties
                 }
               />
@@ -126,14 +114,11 @@ export function CardsMetric() {
                 strokeWidth={2}
                 activeDot={{
                   r: 8,
-                  style: { fill: 'var(--theme-primary)' },
+                  style: { fill: 'hsl(var(--primary))' },
                 }}
                 style={
                   {
-                    stroke: 'var(--theme-primary)',
-                    '--theme-primary': `hsl(${
-                      theme?.[mode === 'dark' ? 'dark' : 'light'].primary
-                    })`,
+                    stroke: 'hsl(var(--primary))',
                   } as React.CSSProperties
                 }
               />

@@ -15,16 +15,6 @@ import {
 } from '../ui/card';
 import { Button } from '../ui/button';
 
-//TODO: Replace with your global state
-const theme = {
-  light: {
-    primary: '250 52% 26%',
-  },
-  dark: {
-    primary: '250 52% 26%',
-  },
-};
-
 const data = [
   {
     goal: 400,
@@ -115,11 +105,8 @@ export function CardsActivityGoal() {
                 dataKey="goal"
                 style={
                   {
-                    fill: 'var(--theme-primary)',
+                    fill: 'hsl(var(--primary))',
                     opacity: 0.2,
-                    '--theme-primary': `hsl(${
-                      theme?.[mode === 'dark' ? 'dark' : 'light'].primary
-                    })`,
                   } as React.CSSProperties
                 }
               />
