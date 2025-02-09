@@ -20,13 +20,15 @@ const initialThemeValue = {
   border: '212 30% 50%',
   input: '212 30% 24%',
   ring: '212 56% 40%',
-  radius: '0.5rem',
+  radius: '1.0rem',
 };
 
 export const primaryColorAtom = atom('#2d629f');
-export const saturationAtom = atom(80);
-export const lightnessAtom = atom(20);
+export const saturationAtom = atom(20);
+export const lightnessAtom = atom(100);
 
 export const themeAtom = atom<{
   [key: string]: string;
 }>(initialThemeValue);
+
+export const darkModeAtom = atom(false);

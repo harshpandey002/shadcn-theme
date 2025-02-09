@@ -1,5 +1,6 @@
 import { useAtom } from 'jotai';
 import {
+  darkModeAtom,
   lightnessAtom,
   primaryColorAtom,
   saturationAtom,
@@ -29,6 +30,7 @@ export default function useThemeGenerator() {
   const [saturation, setSaturation] = useAtom(saturationAtom);
   const [lightness, setLightness] = useAtom(lightnessAtom);
   const [theme, setTheme] = useAtom(themeAtom);
+  const [isDarkMode, setIsDarkMode] = useAtom(darkModeAtom);
 
   const radius = theme.radius || '0.5rem';
 
@@ -36,18 +38,36 @@ export default function useThemeGenerator() {
 
   function applyTheme(baseHex: string) {
     setColor(baseHex);
-    generateThemeColors(baseHex);
+    generateAndApplyTheme(baseHex, isDarkMode);
   }
 
   function modifySaturation(sat: number[]) {
     setSaturation(sat[0]);
-    generateThemeColors(color);
+    generateAndApplyTheme(color, isDarkMode);
   }
 
   function modifyLightness(lig: number[]) {
     setLightness(lig[0]);
-    generateThemeColors(color);
+    generateAndApplyTheme(color, isDarkMode);
   }
+
+  const handleDarkmodeChange = (mode: boolean) => {
+    setIsDarkMode(mode);
+    generateAndApplyTheme(color, mode);
+  };
+
+  const generateAndApplyTheme = (baseHex: string, isDarkMode: boolean) => {
+    const lightTheme = generateLightColors(baseHex);
+    const darkTheme = generateDarkColors(baseHex);
+
+    if (isDarkMode) {
+      applyThemeColors(darkTheme);
+      debouncedSetTheme(darkTheme);
+    } else {
+      applyThemeColors(lightTheme);
+      debouncedSetTheme(lightTheme);
+    }
+  };
 
   const handleAdvControls = (e: any) => {
     const { h, s, l } = hexToHsl(e.target.value);
@@ -62,8 +82,12 @@ export default function useThemeGenerator() {
     document.documentElement.style.setProperty(cssVarName, hsl);
   };
 
-  function modifyColor(hsl: HslProp, config: ConfigProp) {
-    let { h, s = 0, l = 0 } = hsl;
+  function modifyColor(hsl: HslProp, config?: ConfigProp) {
+    if (!config) {
+      return `${hsl.h} ${hsl.s}% ${hsl.l}%`;
+    }
+
+    let { h = 0, s = 0, l = 0 } = hsl;
 
     const { sFixed, lFixed, sMax, sMin, lMax, lMin } = config;
 
@@ -76,10 +100,10 @@ export default function useThemeGenerator() {
     if (lMax != undefined && lMin != undefined)
       l = Math.min(lMax, Math.max(lMin, lightness));
 
-    return `${h} ${s}% ${l}%`;
+    return `${Math.ceil(h)} ${Math.ceil(s)}% ${Math.ceil(l)}%`;
   }
 
-  function generateThemeColors(primaryColor: string) {
+  function generateLightColors(primaryColor: string): Record<string, string> {
     const hsl = hexToHsl(primaryColor);
     const { h, l } = hsl;
 
@@ -158,8 +182,85 @@ export default function useThemeGenerator() {
       radius,
     };
 
-    applyThemeColors(theme);
-    debouncedSetTheme(theme);
+    return theme;
+  }
+
+  function generateDarkColors(primaryColor: string) {
+    const hsl = hexToHsl(primaryColor);
+    const { h, l } = hsl;
+
+    const theme = {
+      background: modifyColor(hsl, {
+        sMin: 10,
+        sMax: 50,
+        lMin: 5,
+        lMax: 10,
+      }),
+      foreground: modifyColor(hsl, { sMin: 0, sMax: 5, lMin: 90, lMax: 100 }),
+      card: modifyColor(hsl, { sMin: 0, sMax: 50, lMin: 0, lMax: 10 }),
+      'card-foreground': modifyColor(hsl, {
+        sMin: 0,
+        sMax: 5,
+        lMin: 90,
+        lMax: 100,
+      }),
+      popover: modifyColor(hsl, {
+        sMin: 10,
+        sMax: 50,
+        lMin: 5,
+        lMax: 5,
+      }),
+      'popover-foreground': modifyColor(hsl, {
+        sMin: 0,
+        sMax: 5,
+        lMin: 90,
+        lMax: 100,
+      }),
+      primary: modifyColor(hsl),
+      'primary-foreground': modifyColor({ h: 0, s: 0, l: l > 60 ? 0 : 100 }),
+      secondary: modifyColor(hsl, {
+        sMin: 10,
+        sMax: 30,
+        lMin: 10,
+        lMax: 20,
+      }),
+      'secondary-foreground': modifyColor({ h: 0, s: 100, l: 100 }),
+      muted: modifyColor(
+        { h: h / 1.2 },
+        { sMin: 10, sMax: 30, lMin: 15, lMax: 25 }
+      ),
+      'muted-foreground': modifyColor(hsl, {
+        sMin: 0,
+        sMax: 5,
+        lMin: 60,
+        lMax: 65,
+      }),
+      accent: modifyColor(
+        { h: h / 1.2 },
+        { sMin: 10, sMax: 30, lMin: 15, lMax: 25 }
+      ),
+      'accent-foreground': modifyColor(hsl, {
+        sMin: 0,
+        sMax: 5,
+        lMin: 90,
+        lMax: 95,
+      }),
+      destructive: modifyColor(
+        { h: 0 },
+        { sMin: 50, sMax: 100, lMin: 30, lMax: 50 }
+      ),
+      'destructive-foreground': modifyColor(hsl, {
+        sMin: 0,
+        sMax: 5,
+        lMin: 90,
+        lMax: 100,
+      }),
+      border: modifyColor(hsl, { sMin: 20, sMax: 30, lMin: 18, lMax: 50 }),
+      input: modifyColor(hsl, { sMin: 20, sMax: 30, lMin: 18, lMax: 50 }),
+      ring: modifyColor(hsl),
+      radius,
+    };
+
     return theme;
   }
 
@@ -171,5 +272,7 @@ export default function useThemeGenerator() {
     modifySaturation,
     modifyLightness,
     handleAdvControls,
+    isDarkMode,
+    handleDarkmodeChange,
   };
 }

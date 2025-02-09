@@ -13,7 +13,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="p-5 md:p-10">
+    <div className="max-w-7xl mx-auto p-5 md:p-10 text-foreground">
       <Navbar />
       <Hero />
       {mounted ? <CardsDemo /> : null}

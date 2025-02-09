@@ -17,7 +17,7 @@ export default function Hero() {
   };
 
   return (
-    <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-10 pt-10 pb-20">
+    <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-10 py-20">
       <div className="col-span-2 flex flex-col justify-center text-center md:text-start">
         <div className="flex items-center justify-center md:justify-start gap-2 mb-2 ml-2">
           <Link
@@ -38,7 +38,7 @@ export default function Hero() {
           </Link>
         </div>
 
-        <h1 className="text-4xl font-black italic">Shadcn Theme Generator</h1>
+        <h1 className="text-4xl font-black italic">shadcn Theme Generator</h1>
         <p className="max-w-xl md:text-xl mt-2 font-medium text-muted-foreground">
           Generate high quality theme for your website with a single color, or
           click Advance Controls to have even more control over your theme.
@@ -48,7 +48,7 @@ export default function Hero() {
           target="_blank"
           className={cn(
             buttonVariants(),
-            'flex items-center gap-3 w-max mt-8 rounded-[24px] bg-[#242424] text-white text-md hover:bg-[#070707] hover:underline mx-auto md:mx-0'
+            'flex items-center gap-3 w-max px-6 mt-8 rounded-[24px] bg-[#242424] text-white text-md hover:bg-[#070707] hover:underline mx-auto md:mx-0'
           )}>
           <Icons.gitHub className="h-5 w-5" />
           View Code

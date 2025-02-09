@@ -1,5 +1,5 @@
 'use client';
-import { Code, Settings2 } from 'lucide-react';
+import { Code, MoonStar, Settings2, Sun } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
@@ -11,6 +11,7 @@ import useThemeGenerator from '../hooks/useThemeGenerator';
 import { useAtom } from 'jotai';
 import { themeAtom } from '@/jotai/jotai';
 import { Dispatch, SetStateAction } from 'react';
+import { cn } from '@/lib/utils';
 
 export default function BasicControls({
   showAdvControls,
@@ -28,6 +29,8 @@ export default function BasicControls({
     lightness,
     modifyLightness,
     modifySaturation,
+    isDarkMode,
+    handleDarkmodeChange,
   } = useThemeGenerator();
 
   const [theme, setTheme] = useAtom(themeAtom);
@@ -65,7 +68,7 @@ export default function BasicControls({
           />
         </div>
       </div>
-      <div className="flex flex-col flex-1 gap-4">
+      <div className="flex flex-col flex-1 gap-1.5">
         <div className="w-full">
           <Label className="text-xs" htmlFor="saturation">
             Saturation
@@ -98,24 +101,48 @@ export default function BasicControls({
           <Label className="text-xs" htmlFor="radius">
             Radius
           </Label>
-          <ToggleGroup
-            id="radius"
-            variant="outline"
-            type="single"
-            value={theme['radius']}
-            onValueChange={handleRadiusChange}
-            className="w-full flex justify-between mt-2">
-            {['0', '0.3', '0.5', '0.75', '1.0'].map((rad) => (
-              <ToggleGroupItem
+          <div id="radius" className="w-full flex justify-between gap-2 mt-2">
+            {['0rem', '0.3rem', '0.5rem', '0.75rem', '1.0rem'].map((rad) => (
+              <span
                 key={rad}
-                className="flex-1 h-8 rounded-3xl border-border data-[state=on]:bg-transparent data-[state=on]:border-2"
-                value={`${rad}rem`}
+                onClick={() => handleRadiusChange(rad)}
+                className={cn(
+                  'flex items-center justify-center text-sm h-8 flex-1 rounded-lg border border-border outline outline-transparent hover:bg-accent transition-colors cursor-pointer',
+                  theme['radius'] === rad &&
+                    'border-primary outline-1 outline-primary'
+                )}
                 aria-label={`Radius ${rad}`}>
-                {rad}
-              </ToggleGroupItem>
+                {rad.replace('rem', '')}
+              </span>
             ))}
-          </ToggleGroup>
+          </div>
         </div>
+        <div className="w-full">
+          <Label className="text-xs" htmlFor="mode">
+            Mode
+          </Label>
+          <div id="theme" className="w-full flex gap-2 justify-start mt-2">
+            {['light', 'dark'].map((mode) => (
+              <span
+                key={mode}
+                onClick={() => handleDarkmodeChange(mode === 'dark')}
+                className={cn(
+                  'flex items-center justify-center gap-2 text-sm h-8 flex-1 rounded-lg border border-border outline outline-transparent hover:bg-accent transition-colors cursor-pointer',
+                  isDarkMode === (mode === 'dark') &&
+                    'border-primary outline-1 outline-primary'
+                )}
+                aria-label={`${mode} mode`}>
+                {mode === 'light' ? (
+                  <Sun className="h-5 w-5 mr-2" />
+                ) : (
+                  <MoonStar className="h-5 w-5 mr-2" />
+                )}
+                {mode}
+              </span>
+            ))}
+          </div>
+        </div>
+
         <div className="mt-auto flex gap-2">
           <Button
             variant="secondary"
