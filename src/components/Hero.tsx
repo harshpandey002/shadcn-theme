@@ -48,7 +48,7 @@ export default function Hero() {
           target="_blank"
           className={cn(
             buttonVariants(),
-            'flex items-center gap-3 w-max px-6 mt-8 rounded-[24px] bg-[#242424] text-white text-md hover:bg-[#070707] hover:underline mx-auto md:mx-0'
+            'flex items-center gap-3 w-max px-6 mt-8 rounded-lg bg-primary text-primary-foreground text-md mx-auto md:mx-0'
           )}>
           <Icons.gitHub className="h-5 w-5" />
           View Code
