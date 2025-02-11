@@ -6,7 +6,6 @@ import { Label } from './ui/label';
 
 import { HexColorPicker } from 'react-colorful';
 import { Slider } from './ui/slider';
-import { ToggleGroup, ToggleGroupItem } from './ui/toggle-group';
 import useThemeGenerator from '../hooks/useThemeGenerator';
 import { useAtom } from 'jotai';
 import { themeAtom } from '@/jotai/jotai';
@@ -36,7 +35,11 @@ export default function BasicControls({
   const [theme, setTheme] = useAtom(themeAtom);
 
   const handleRadiusChange = (radius: string) => {
-    setTheme((prev) => ({ ...prev, radius }));
+    setTheme((prev) => ({
+      ...prev,
+      light: { ...prev.light, radius },
+      dark: { ...prev.dark, radius },
+    }));
 
     document.documentElement.style.setProperty(`--radius`, radius);
   };
@@ -108,7 +111,7 @@ export default function BasicControls({
                 onClick={() => handleRadiusChange(rad)}
                 className={cn(
                   'flex items-center justify-center text-sm h-8 flex-1 rounded-lg border border-border outline outline-transparent hover:bg-accent transition-colors cursor-pointer',
-                  theme['radius'] === rad &&
+                  theme.light['radius'] === rad &&
                     'border-primary outline-1 outline-primary'
                 )}
                 aria-label={`Radius ${rad}`}>

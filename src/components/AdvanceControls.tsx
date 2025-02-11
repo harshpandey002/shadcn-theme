@@ -6,7 +6,7 @@ import { Label } from './ui/label';
 import useThemeGenerator from '../hooks/useThemeGenerator';
 import { cssVariables } from '@/lib/cssVariables';
 import { useAtomValue } from 'jotai';
-import { themeAtom } from '@/jotai/jotai';
+import { darkModeAtom, themeAtom } from '@/jotai/jotai';
 import { hslToHex } from '@/lib/color/hslToHex';
 import {
   Card,
@@ -24,12 +24,15 @@ export default function AdvanceControls({
 }) {
   const { handleAdvControls } = useThemeGenerator();
   const theme = useAtomValue(themeAtom);
+  const isDarkMode = useAtomValue(darkModeAtom);
 
   return (
     <Card>
       <CardHeader className="flex-row justify-between">
         <div className="flex flex-col gap-1">
-          <CardTitle>Advance Controls</CardTitle>
+          <CardTitle>
+            Advance Controls ({isDarkMode ? 'Dark' : 'Light'} Mode)
+          </CardTitle>
           <CardDescription className="italic text-destructive">
             Note: Updating basic controls will override these values
           </CardDescription>
@@ -51,7 +54,11 @@ export default function AdvanceControls({
                 type="color"
                 id={cssVar}
                 className="ml-auto w-24 p-0 border-none bg-transparent"
-                value={hslToHex(theme[cssVar])}
+                value={hslToHex(
+                  theme[isDarkMode ? 'dark' : 'light'][
+                    cssVar as keyof (typeof theme)[keyof typeof theme]
+                  ]
+                )}
                 onChange={handleAdvControls}
               />
             </div>

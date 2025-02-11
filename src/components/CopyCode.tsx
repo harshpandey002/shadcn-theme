@@ -52,7 +52,7 @@ export default function CopyCode({
             Copy and paste the following code into your CSS file.
           </DialogDescription>
         </DialogHeader>
-        <pre className="text-sm border border-border text-foreground bg-muted rounded-lg relative">
+        <pre className="text-sm border border-border text-foreground bg-muted rounded-lg relative h-[480px] overflow-y-auto">
           <Button
             size="sm"
             variant="ghost"

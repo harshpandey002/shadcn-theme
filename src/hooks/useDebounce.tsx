@@ -13,7 +13,6 @@ export function useDebounce(callback: any, delay: number) {
       }
       // Set up a new timer
       timer.current = setTimeout(() => {
-        console.log('Debounced function called');
         callback(...args);
       }, delay);
     },

@@ -23,18 +23,18 @@ export default function Hero() {
           <Link
             target="_blank"
             href="https://www.linkedin.com/in/harshpandey002/">
-            {<Icons.linkedin className="h-5 w-5 fill-primary" />}
+            {<Icons.linkedin className="h-5 w-5 fill-foreground" />}
           </Link>
           <Link target="_blank" href="https://x.com/harshpandey002">
-            {<Icons.twitter className="h-5 w-5 fill-primary" />}
+            {<Icons.twitter className="h-5 w-5 fill-foreground" />}
           </Link>
           <div className="h-full w-[1px] bg-muted" />
           <Link
             target="_blank"
             href="https://harshkumarpandey.com"
-            className="flex items-center gap-2 hover:underline underline-offset-2 text-primary font-medium">
+            className="flex items-center gap-2 hover:underline underline-offset-2 text-foreground font-medium">
             harshkumarpandey.com
-            <MoveRight className="h-5 w-5 text-primary" />
+            <MoveRight className="h-5 w-5 text-foreground" />
           </Link>
         </div>
 

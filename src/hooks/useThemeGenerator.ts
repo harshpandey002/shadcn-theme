@@ -32,7 +32,7 @@ export default function useThemeGenerator() {
   const [theme, setTheme] = useAtom(themeAtom);
   const [isDarkMode, setIsDarkMode] = useAtom(darkModeAtom);
 
-  const radius = theme.radius || '0.5rem';
+  const radius = theme.light.radius || '1.0rem';
 
   const debouncedSetTheme = useDebounce(setTheme, 400);
 
@@ -59,23 +59,29 @@ export default function useThemeGenerator() {
   const generateAndApplyTheme = (baseHex: string, isDarkMode: boolean) => {
     const lightTheme = generateLightColors(baseHex);
     const darkTheme = generateDarkColors(baseHex);
+    debouncedSetTheme({
+      light: lightTheme,
+      dark: darkTheme,
+    });
 
     if (isDarkMode) {
       applyThemeColors(darkTheme);
-      debouncedSetTheme(darkTheme);
     } else {
       applyThemeColors(lightTheme);
-      debouncedSetTheme(lightTheme);
     }
   };
 
   const handleAdvControls = (e: any) => {
     const { h, s, l } = hexToHsl(e.target.value);
     const hsl = `${h} ${s}% ${l}%`;
+    const mode = isDarkMode ? 'dark' : 'light';
 
     setTheme({
       ...theme,
-      [e.target.id]: hsl,
+      [mode]: {
+        ...theme[mode],
+        [e.target.id]: hsl,
+      },
     });
 
     const cssVarName = `--${e.target.id}`;
