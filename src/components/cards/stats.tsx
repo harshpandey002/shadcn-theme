@@ -3,7 +3,7 @@ import { Bar, BarChart, Line, LineChart, ResponsiveContainer } from 'recharts';
 
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { useAtomValue } from 'jotai';
-import { themeAtom } from '@/jotai/jotai';
+import { darkModeAtom, themeAtom } from '@/jotai/jotai';
 
 const data = [
   {
@@ -41,8 +41,10 @@ const data = [
 ];
 
 export function CardsStats() {
-  const { theme: mode } = useTheme();
   const theme = useAtomValue(themeAtom);
+  const isDarkMode = useAtomValue(darkModeAtom);
+
+  const primary = isDarkMode ? theme?.dark?.primary : theme?.light?.primary;
 
   return (
     <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-2">
@@ -102,7 +104,7 @@ export function CardsStats() {
                     {
                       fill: 'hsl(var(--primary))',
                       opacity: 1,
-                      '--theme-primary': `hsl(${theme?.primary})`,
+                      '--theme-primary': `hsl(${primary})`,
                     } as React.CSSProperties
                   }
                 />
