@@ -31,9 +31,9 @@ export default function Hero() {
           <div className="h-full w-[1px] bg-muted" />
           <Link
             target="_blank"
-            href="https://harshkumarpandey.com"
+            href="https://harshpandey.com"
             className="flex items-center gap-2 hover:underline underline-offset-2 text-foreground font-medium">
-            harshkumarpandey.com
+            harshpandey.com
             <MoveRight className="h-5 w-5 text-foreground" />
           </Link>
         </div>
